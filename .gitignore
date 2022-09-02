@@ -38,3 +38,4 @@ __pycache__/
 env/
 .venv/
 version.py
+/report.xml

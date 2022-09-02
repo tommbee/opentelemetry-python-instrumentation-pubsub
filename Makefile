@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: install lint test black isort format
+.PHONY: install lint test format
 
 install:
 	pip install -e .[dev,test]
@@ -9,13 +9,7 @@ lint:
 	flake8
 
 test:
-	py.test
-
-black:
-	black -v --check .
-
-isort:
-	isort --check-only pubsub_opentelemetry
+	pytest
 
 format:
 	black pubsub_opentelemetry

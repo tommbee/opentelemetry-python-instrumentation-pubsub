@@ -32,6 +32,10 @@ dev = [
 test = [
     "flake8==4.0.1",
     "pytest==7.1.2",
+    "pytest-mock==3.8.2",
+    "wrapt ~= 1.14",
+    "opentelemetry-test-utils == 0.33b0",
+    "google-cloud-pubsub ~= 2.13",
 ]
 
 [tool.isort]
@@ -43,3 +47,9 @@ skip-string-normalization = 1
 
 [tool.setuptools_scm]
 write_to = "pubsub_opentelemetry/version.py"
+
+[tool.pytest.ini_options]
+addopts = "--junitxml=./report.xml"
+testpaths = [
+    "tests",
+]
