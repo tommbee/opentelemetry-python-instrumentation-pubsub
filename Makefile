@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: install lint test format
+.PHONY: install lint test format release
 
 install:
 	pip install -e .[dev,test]
@@ -10,6 +10,12 @@ lint:
 
 test:
 	pytest
+
+build:
+	python -m build
+
+release: build
+	twine upload dist/*
 
 format:
 	black pubsub_opentelemetry
