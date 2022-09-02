@@ -24,12 +24,18 @@ jobs:
       - checkout
       - install_deps
       - run: make lint
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - install_deps
+      - run: make test
 
 workflows:
   test-release:
     jobs:
       - lint
-      - unit
+      - test
       - release:
           requires:
             - lint
