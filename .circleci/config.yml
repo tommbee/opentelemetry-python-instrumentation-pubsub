@@ -37,6 +37,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install dev dependencies
+          command: |
+            python3 -m venv ~/venv
+            . ~/venv/bin/activate
+      - run:
           name: Create release
           command: |
             pip install .
