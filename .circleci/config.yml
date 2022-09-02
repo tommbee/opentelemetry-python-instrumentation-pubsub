@@ -3,7 +3,7 @@ version: 2.1
 defaults: &defaults
   working_directory: ~/lib
   docker:
-    - image: circleci/python:3.10
+    - image: cimg/python:3.10
 
 commands:
   install_deps:
@@ -30,6 +30,8 @@ jobs:
       - checkout
       - install_deps
       - run: make test
+      - store_test_results:
+          path: report.xml
 
 workflows:
   test-release:
