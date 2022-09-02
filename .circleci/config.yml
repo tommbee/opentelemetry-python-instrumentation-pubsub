@@ -37,7 +37,11 @@ jobs:
     steps:
       - checkout
       - install_deps
-      - run: make release
+      - run:
+          name: Create release
+          command: |
+            pip install -q build
+            make release
 
 workflows:
   test-release:
