@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "opentelemetry-instrumentation-pubsub"
-description = 'Instrument Open Telemetry tracing within the GCP PubSub library.'
+description = 'Instrument Open Telemetry tracing within the GCP PubSub library'
 readme = 'README.md'
 dynamic = ['version']
 license = {file = "LICENSE"}
