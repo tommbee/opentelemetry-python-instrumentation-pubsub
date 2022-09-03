@@ -1,5 +1,8 @@
 # Open Telemetry GCP PubSub Instrumentation for Python
 
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/tommbee/opentelemetry-python-instrumentation-pubsub/tree/main.svg?style=shield)](https://dl.circleci.com/status-badge/redirect/gh/tommbee/opentelemetry-python-instrumentation-pubsub/tree/main)
+[![PyPi version](https://img.shields.io/pypi/v/opentelemetry-instrumentation-pubsub.svg)](https://pypi.org/project/opentelemetry-instrumentation-pubsub/)
+
 This package provides automatic instrumentation for the [`google-cloud-pubsub`](https://pypi.org/project/google-cloud-pubsub/) client library.
 
 ## Installation
