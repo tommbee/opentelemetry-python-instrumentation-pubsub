@@ -12,6 +12,7 @@ test:
 	pytest
 
 build:
+    pip install .[build]
 	python -m build
 
 release: build

@@ -39,9 +39,7 @@ jobs:
       - install_deps
       - run:
           name: Create release
-          command: |
-            pip install -q build
-            make release
+          command: make release
 
 workflows:
   test-release:

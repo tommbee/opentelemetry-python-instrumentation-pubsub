@@ -47,6 +47,9 @@ test = [
     "opentelemetry-test-utils == 0.33b0",
     "google-cloud-pubsub ~= 2.13",
 ]
+build = [
+    'build'
+]
 
 [tool.isort]
 profile = "black"
