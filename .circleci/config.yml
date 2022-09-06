@@ -46,12 +46,14 @@ jobs:
       version:
         type: executor
     executor: << parameters.version >>
-    environment:
-      TARGET_ENV: << parameters.version >>
     steps:
       - checkout
       - run: pip install tox
-      - run: make tox TOX_ENV=$(TARGET_ENV)
+      - run:
+          name: Run tests via tox
+          command: |
+            TOX_ENV="<< parameters.version >>"
+            make tox
       - store_test_results:
           path: reports
   release:
