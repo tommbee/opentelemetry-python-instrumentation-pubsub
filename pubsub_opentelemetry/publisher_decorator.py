@@ -24,7 +24,7 @@ class PublisherDecorator:
                 SpanAttributes.MESSAGING_DESTINATION: topic,
                 SpanAttributes.MESSAGING_DESTINATION_KIND: 'topic',
                 SpanAttributes.MESSAGING_PROTOCOL: 'pubsub',
-                SpanAttributes.MESSAGING_MESSAGE_PAYLOAD_SIZE_BYTES: len(data),
+                SpanAttributes.MESSAGING_MESSAGE_PAYLOAD_SIZE_BYTES: str(len(data)),
             }
             with self._tracer.start_as_current_span(
                 f'{topic} send', kind=trace.SpanKind.PRODUCER, attributes=attributes

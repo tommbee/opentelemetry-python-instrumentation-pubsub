@@ -7,6 +7,7 @@ install:
 
 lint:
 	flake8
+	mypy pubsub_opentelemetry
 
 test:
 	pytest

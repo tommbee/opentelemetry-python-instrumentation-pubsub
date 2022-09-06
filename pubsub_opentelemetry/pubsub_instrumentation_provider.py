@@ -2,7 +2,7 @@ from typing import Callable, Collection, TypeVar
 
 from google.cloud.pubsub_v1 import PublisherClient, SubscriberClient
 from opentelemetry import trace
-from opentelemetry.instrumentation.instrumentor import BaseInstrumentor
+from opentelemetry.instrumentation.instrumentor import BaseInstrumentor  # type: ignore
 from opentelemetry.instrumentation.utils import unwrap
 from wrapt import wrap_function_wrapper
 

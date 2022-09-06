@@ -1,19 +1,17 @@
-import pkg_resources
+import importlib_metadata
 
 from pubsub_opentelemetry.utils import _get_distro_version
 
 
 def test_get_distro_version(mocker):
-    mocker.patch('pkg_resources.get_distribution')
-    mock_distro = mocker.Mock()
-    mock_distro.version = '1.2.3'
-    pkg_resources.get_distribution.return_value = mock_distro
-    version = _get_distro_version('some-package')
-    assert version == '1.2.3'
+    mocker.patch('importlib_metadata.version')
+    importlib_metadata.version.return_value = '1.2.3'
+    v = _get_distro_version('some-package')
+    assert v == '1.2.3'
 
 
 def test_get_not_found_distro_version(mocker):
-    mocker.patch('pkg_resources.get_distribution')
-    pkg_resources.get_distribution.side_effect = pkg_resources.DistributionNotFound()
-    version = _get_distro_version('some-package')
-    assert version == '0.0'
+    mocker.patch('importlib_metadata.version')
+    importlib_metadata.version.side_effect = importlib_metadata.PackageNotFoundError()
+    v = _get_distro_version('some-package')
+    assert v == '0.0'

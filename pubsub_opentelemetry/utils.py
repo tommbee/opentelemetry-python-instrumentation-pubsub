@@ -1,4 +1,4 @@
-import pkg_resources
+import importlib_metadata
 
 
 def _get_distro_version(distribution: str) -> str:
@@ -6,7 +6,7 @@ def _get_distro_version(distribution: str) -> str:
     Get the version of an installed distribution
     """
     try:
-        version = pkg_resources.get_distribution(distribution).version
-    except pkg_resources.DistributionNotFound:
+        version = importlib_metadata.version(distribution)
+    except importlib_metadata.PackageNotFoundError:
         version = "0.0"
     return version
