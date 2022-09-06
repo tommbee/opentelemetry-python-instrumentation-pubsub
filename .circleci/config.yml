@@ -6,9 +6,6 @@ defaults: &defaults
     - image: cimg/python:3.9
 
 executors:
-  py36:
-    docker:
-      - image: cimg/python:3.6
   py37:
     docker:
       - image: cimg/python:3.7
@@ -76,7 +73,7 @@ workflows:
       - test:
           matrix:
             parameters:
-              version: [py36, py37, py38, py39, py310]
+              version: [py37, py38, py39, py310]
           filters:
             tags:
               only: /.*/
