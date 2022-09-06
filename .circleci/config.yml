@@ -36,7 +36,10 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run: pyenv install 3.6.15 3.7.13 3.8.13 3.9.10 3.10.5
+      - run: pyenv install 3.6.15
+      - run: pyenv install 3.7.13
+      - run: pyenv install 3.8.13
+      - run: pyenv install 3.10.5
       - run: pyenv local 3.6.15 3.7.13 3.8.13 3.9.10 3.10.5
       - run: make test-all
       - store_test_results:
