@@ -81,7 +81,6 @@ deps =
     wrapt
     opentelemetry-test-utils
     google-cloud-pubsub
-    importlib_metadata
 commands = pytest --junitxml=./reports/{envname}-report.xml
 """
 
