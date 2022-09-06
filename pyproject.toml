@@ -40,7 +40,7 @@ dev = [
     "importlib_metadata==4.12.0",
 ]
 test = [
-    "flake8 ~= 4.0.0",
+    "flake8 ~= 4.0",
     "pytest-mock ~= 3.8",
     "pytest ~= 7.1",
     "wrapt ~= 1.14",
