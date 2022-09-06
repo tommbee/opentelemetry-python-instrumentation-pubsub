@@ -72,7 +72,7 @@ workflows:
               only: /.*/
       - test:
           parameters:
-            version: [ python_36, python_37, python_38, python_39, python_310 ]
+            version: [python_36, python_37, python_38, python_39, python_310]
           filters:
             tags:
               only: /.*/
