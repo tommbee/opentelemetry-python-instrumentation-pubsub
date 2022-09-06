@@ -52,7 +52,9 @@ jobs:
       - run:
           name: Run tests via tox
           command: |
-            make tox TOX_ENV="<<parameters.version>>"
+            TARGET_ENV="<<parameters.version>>"
+            echo $TARGET_ENV
+            make tox TOX_ENV="$(TARGET_ENV)"
       - store_test_results:
           path: reports
   release:
