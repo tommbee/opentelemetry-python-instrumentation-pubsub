@@ -50,7 +50,7 @@ jobs:
       - checkout
 #      - install_deps
       - run: pip install tox
-      - run: make test
+      - run: make test-all
       - store_test_results:
           path: reports
   release:
