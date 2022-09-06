@@ -29,6 +29,8 @@ jobs:
     steps:
       - checkout
       - install_deps
+      - run: pip install tox tox-pyenv
+      - run: pyenv local 3.6.15 3.7.13 3.8.13 3.9.10 3.10.5
       - run: make test-all
       - store_test_results:
           path: reports
@@ -37,8 +39,6 @@ jobs:
     steps:
       - checkout
       - install_deps
-      - run: pip install tox tox-pyenv
-      - run: pyenv local 3.6.15 3.7.13 3.8.13 3.9.10 3.10.5
       - run:
           name: Create release
           command: |
