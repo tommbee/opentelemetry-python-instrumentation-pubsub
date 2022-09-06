@@ -1,15 +1,19 @@
 SHELL := /bin/bash
 
-.PHONY: install lint test format release build
+.PHONY: install lint test tox format release build
 
 install:
 	pip install -e .[dev,test]
 
 lint:
 	flake8
+	mypy pubsub_opentelemetry
 
 test:
 	pytest
+
+tox $(TOX_ENV):
+	[ -z "$(TOX_ENV)" ] && tox || tox -e $(TOX_ENV)
 
 build:
 	python -m build

@@ -31,4 +31,26 @@ with pubsub_v1.SubscriberClient() as subscriber:
 ```
 ---
 
+## Development
+
+Install dependencies:
+```bash
+make install
+```
+
+Run lint checks:
+```bash
+make lint
+```
+
+Run unit tests:
+```bash
+make test
+```
+
+Run tests against supported Python versions (using tox):
+```bash
+make tox
+```
+
 [License](LICENSE)

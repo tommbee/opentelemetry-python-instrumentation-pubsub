@@ -3,7 +3,21 @@ version: 2.1
 defaults: &defaults
   working_directory: ~/lib
   docker:
-    - image: cimg/python:3.10
+    - image: cimg/python:3.9
+
+executors:
+  py37:
+    docker:
+      - image: cimg/python:3.7
+  py38:
+    docker:
+      - image: cimg/python:3.8
+  py39:
+    docker:
+      - image: cimg/python:3.9
+  py310:
+    docker:
+      - image: cimg/python:3.10
 
 commands:
   install_deps:
@@ -25,13 +39,19 @@ jobs:
       - install_deps
       - run: make lint
   test:
-    <<: *defaults
+    parameters:
+      version:
+        type: string
+    executor: <<parameters.version>>
     steps:
       - checkout
       - install_deps
-      - run: make test
+      - run:
+          name: Run tests via tox
+          command: |
+            make tox TOX_ENV="<<parameters.version>>"
       - store_test_results:
-          path: report.xml
+          path: reports
   release:
     <<: *defaults
     steps:
@@ -51,6 +71,9 @@ workflows:
             tags:
               only: /.*/
       - test:
+          matrix:
+            parameters:
+              version: [py37, py38, py39, py310]
           filters:
             tags:
               only: /.*/

@@ -23,7 +23,7 @@ class TestPublisherDecorator:
                 'messaging.protocol': 'pubsub',
                 'messaging.destination': 'topic',
                 'messaging.destination_kind': 'topic',
-                'messaging.message_payload_size_bytes': 12,
+                'messaging.message_payload_size_bytes': '12',
                 'messaging.operation': 'send',
             },
         )

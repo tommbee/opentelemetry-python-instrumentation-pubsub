@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=3.4"]
+requires = ["setuptools>=42", "wheel", "toml", "setuptools_scm[toml]>=3.4"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,13 +7,13 @@ name = "opentelemetry-instrumentation-pubsub"
 description = 'Instrument Open Telemetry tracing within the GCP PubSub library'
 readme = 'README.md'
 dynamic = ['version']
-license = {file = "LICENSE"}
+license = {file = "LICENCE"}
 authors = [
-  {email = "tombennett86@hotmail.co.uk"},
+  {email = "mrtbennett@outlook.com"},
   {name = "Tom Bennett"},
 ]
 maintainers = [
-  {name = "Tom Bennett", email = "tombennett86@hotmail.co.uk"},
+  {name = "Tom Bennett", email = "mrtbennett@outlook.com"},
 ]
 requires-python = '>=3.7'
 dependencies = [
@@ -25,8 +25,6 @@ dependencies = [
 classifiers = [
     'Development Status :: 4 - Beta',
     'Intended Audience :: Developers',
-    'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.6',
     'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
@@ -38,14 +36,17 @@ dev = [
     "black==22.3.0",
     "isort==5.10.1",
     "twine==4.0.0",
+    "mypy==0.971",
+    "importlib_metadata",
 ]
 test = [
-    "flake8==4.0.1",
-    "pytest==7.1.2",
-    "pytest-mock==3.8.2",
+    "flake8 ~= 4.0",
+    "pytest-mock ~= 3.8",
+    "pytest ~= 7.1",
     "wrapt ~= 1.14",
     "opentelemetry-test-utils == 0.33b0",
     "google-cloud-pubsub ~= 2.13",
+    "tox ~= 3.25",
 ]
 
 [tool.isort]
@@ -55,11 +56,39 @@ multi_line_output = 3
 [tool.black]
 skip-string-normalization = 1
 
+[tool.setuptools]
+packages = ["pubsub_opentelemetry"]
+
 [tool.setuptools_scm]
 write_to = "pubsub_opentelemetry/version.py"
 
 [tool.pytest.ini_options]
-addopts = "--junitxml=./report.xml"
+addopts = "--junitxml=./reports/report.xml"
 testpaths = [
     "tests",
 ]
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py37,py38,py39,py310
+isolated_build = True
+
+[testenv]
+deps =
+    pytest
+    pytest-mock
+    wrapt
+    opentelemetry-test-utils
+    google-cloud-pubsub
+    importlib_metadata
+commands = pytest --junitxml=./reports/{envname}-report.xml
+"""
+
+[tool.mypy]
+ignore_missing_imports = "True"
+namespace_packages = "True"
+pretty = "True"
+show_error_codes = "True"
+implicit_reexport = "True"
+warn_unreachable = "True"
