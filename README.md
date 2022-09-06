@@ -50,7 +50,7 @@ make test
 
 Run tests against supported Python versions (using tox):
 ```bash
-make test-all
+make tox
 ```
 
 [License](LICENSE)

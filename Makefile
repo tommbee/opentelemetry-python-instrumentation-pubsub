@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: install lint format release build
+.PHONY: install lint test tox format release build
 
 install:
 	pip install -e .[dev,test]
