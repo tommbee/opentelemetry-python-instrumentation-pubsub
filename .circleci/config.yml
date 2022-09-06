@@ -48,7 +48,8 @@ jobs:
     executor: << parameters.version >>
     steps:
       - checkout
-      - install_deps
+#      - install_deps
+      - run: pip install tox
       - run: make test
       - store_test_results:
           path: reports
