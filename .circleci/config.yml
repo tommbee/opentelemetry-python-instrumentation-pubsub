@@ -29,9 +29,16 @@ jobs:
     steps:
       - checkout
       - install_deps
-      - run: pip install tox tox-pyenv
-      - run: pyenv local 3.6.15 3.7.13 3.8.13 3.9.10 3.10.5
-      - run: make test-all
+      - run: make test
+      - store_test_results:
+          path: reports
+  test_all:
+    docker:
+      - image: fkrull/multi-python:latest
+    steps:
+      - checkout
+      - install_deps
+      - run: make test
       - store_test_results:
           path: reports
   release:
@@ -56,10 +63,15 @@ workflows:
           filters:
             tags:
               only: /.*/
+      - test_all:
+          filters:
+            tags:
+              only: /.*/
       - release:
           requires:
             - lint
             - test
+            - test_all
           filters:
             tags:
               only: /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
