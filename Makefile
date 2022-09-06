@@ -11,6 +11,9 @@ lint:
 test:
 	pytest
 
+test-all:
+	tox
+
 build:
 	python -m build
 

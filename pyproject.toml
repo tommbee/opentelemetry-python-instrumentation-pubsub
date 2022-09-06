@@ -7,7 +7,7 @@ name = "opentelemetry-instrumentation-pubsub"
 description = 'Instrument Open Telemetry tracing within the GCP PubSub library'
 readme = 'README.md'
 dynamic = ['version']
-license = {file = "LICENSE"}
+license = {file = "LICENCE"}
 authors = [
   {email = "tombennett86@hotmail.co.uk"},
   {name = "Tom Bennett"},
@@ -15,7 +15,7 @@ authors = [
 maintainers = [
   {name = "Tom Bennett", email = "tombennett86@hotmail.co.uk"},
 ]
-requires-python = '>=3.7'
+requires-python = '>=3.6'
 dependencies = [
     "opentelemetry-api ~= 1.12",
     "opentelemetry-instrumentation == 0.33b0",
@@ -25,7 +25,6 @@ dependencies = [
 classifiers = [
     'Development Status :: 4 - Beta',
     'Intended Audience :: Developers',
-    'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.6',
     'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
@@ -40,12 +39,13 @@ dev = [
     "twine==4.0.0",
 ]
 test = [
-    "flake8==4.0.1",
-    "pytest==7.1.2",
-    "pytest-mock==3.8.2",
+    "flake8 == 4.0.1",
+    "pytest ~= 7.1",
+    "pytest-mock == 3.8.2",
     "wrapt ~= 1.14",
     "opentelemetry-test-utils == 0.33b0",
     "google-cloud-pubsub ~= 2.13",
+    "tox ~= 3.25",
 ]
 
 [tool.isort]
@@ -55,11 +55,31 @@ multi_line_output = 3
 [tool.black]
 skip-string-normalization = 1
 
+[tool.setuptools]
+packages = ["pubsub_opentelemetry"]
+
 [tool.setuptools_scm]
 write_to = "pubsub_opentelemetry/version.py"
 
 [tool.pytest.ini_options]
-addopts = "--junitxml=./report.xml"
+addopts = "--junitxml=./reports/report.xml"
 testpaths = [
     "tests",
 ]
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py36,py37,py38,py39,py310
+isolated_build = True
+
+[testenv]
+deps =
+    pytest
+    pytest-mock
+    wrapt
+    opentelemetry-test-utils
+    google-cloud-pubsub
+    opentelemetry-instrumentation
+commands = pytest --junitxml=./reports/{envname}-report.xml
+"""

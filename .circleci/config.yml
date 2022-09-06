@@ -3,7 +3,7 @@ version: 2.1
 defaults: &defaults
   working_directory: ~/lib
   docker:
-    - image: cimg/python:3.10
+    - image: cimg/python:3.9
 
 commands:
   install_deps:
@@ -29,9 +29,9 @@ jobs:
     steps:
       - checkout
       - install_deps
-      - run: make test
+      - run: make test-all
       - store_test_results:
-          path: report.xml
+          path: reports
   release:
     <<: *defaults
     steps:
