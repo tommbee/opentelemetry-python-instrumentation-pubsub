@@ -37,7 +37,7 @@ dev = [
     "isort==5.10.1",
     "twine==4.0.0",
     "mypy==0.971",
-    'importlib_metadata ~= 4.12; importlib_metadata ~= 3.6;',
+    "importlib_metadata",
 ]
 test = [
     "flake8 ~= 4.0",
