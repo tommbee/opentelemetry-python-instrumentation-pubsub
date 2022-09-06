@@ -88,8 +88,6 @@ commands = pytest --junitxml=./reports/{envname}-report.xml
 ignore_missing_imports = "True"
 namespace_packages = "True"
 pretty = "True"
-python_version = "3.9"
 show_error_codes = "True"
-strict = "False"
 implicit_reexport = "True"
 warn_unreachable = "True"
