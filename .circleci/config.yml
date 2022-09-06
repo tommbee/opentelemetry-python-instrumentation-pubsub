@@ -37,8 +37,7 @@ jobs:
       - image: fkrull/multi-python:latest
     steps:
       - checkout
-      - install_deps
-      - run: make test
+      - run: make test-all
       - store_test_results:
           path: reports
   release:
