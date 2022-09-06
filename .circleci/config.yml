@@ -48,7 +48,7 @@ jobs:
     executor: <<parameters.version>>
     steps:
       - checkout
-      - run: pip install -e .[test]
+      - install_deps
       - run:
           name: Run tests via tox
           command: |
