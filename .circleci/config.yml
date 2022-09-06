@@ -5,6 +5,23 @@ defaults: &defaults
   docker:
     - image: cimg/python:3.9
 
+executors:
+  python_36:
+    docker:
+      - image: cimg/python:3.6
+  python_37:
+    docker:
+      - image: cimg/python:3.7
+  python_38:
+    docker:
+      - image: cimg/python:3.8
+  python_39:
+    docker:
+      - image: cimg/python:3.9
+  python_310:
+    docker:
+      - image: cimg/python:3.10
+
 commands:
   install_deps:
     steps:
@@ -25,23 +42,14 @@ jobs:
       - install_deps
       - run: make lint
   test:
-    <<: *defaults
+    parameters:
+      version:
+        type: executor
+    executor: << parameters.version >>
     steps:
       - checkout
       - install_deps
       - run: make test
-      - store_test_results:
-          path: reports
-  test_all:
-    <<: *defaults
-    steps:
-      - checkout
-      - run: pyenv install 3.6.15
-      - run: pyenv install 3.7.13
-      - run: pyenv install 3.8.13
-      - run: pyenv install 3.10.5
-      - run: pyenv local 3.6.15 3.7.13 3.8.13 3.9.10 3.10.5
-      - run: make test-all
       - store_test_results:
           path: reports
   release:
@@ -63,10 +71,8 @@ workflows:
             tags:
               only: /.*/
       - test:
-          filters:
-            tags:
-              only: /.*/
-      - test_all:
+          parameters:
+            version: [ python_36, python_37, python_38, python_39, python_310 ]
           filters:
             tags:
               only: /.*/
@@ -74,7 +80,6 @@ workflows:
           requires:
             - lint
             - test
-            - test_all
           filters:
             tags:
               only: /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
