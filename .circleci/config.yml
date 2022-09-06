@@ -6,19 +6,19 @@ defaults: &defaults
     - image: cimg/python:3.9
 
 executors:
-  python_36:
+  py36:
     docker:
       - image: cimg/python:3.6
-  python_37:
+  py37:
     docker:
       - image: cimg/python:3.7
-  python_38:
+  py38:
     docker:
       - image: cimg/python:3.8
-  python_39:
+  py39:
     docker:
       - image: cimg/python:3.9
-  python_310:
+  py310:
     docker:
       - image: cimg/python:3.10
 
@@ -46,11 +46,12 @@ jobs:
       version:
         type: executor
     executor: << parameters.version >>
+    environment:
+      TARGET_ENV: << parameters.version >>
     steps:
       - checkout
-#      - install_deps
       - run: pip install tox
-      - run: make test-all
+      - run: make tox TOX_ENV=$(TARGET_ENV)
       - store_test_results:
           path: reports
   release:
@@ -74,7 +75,7 @@ workflows:
       - test:
           matrix:
             parameters:
-              version: [python_36, python_37, python_38, python_39, python_310]
+              version: [py36, py37, py38, py39, py310]
           filters:
             tags:
               only: /.*/

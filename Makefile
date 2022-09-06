@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: install lint test format release build
+.PHONY: install lint format release build
 
 install:
 	pip install -e .[dev,test]
@@ -11,8 +11,8 @@ lint:
 test:
 	pytest
 
-test-all:
-	tox
+tox $(TOX_ENV):
+	[ -z "$(TOX_ENV)" ] && tox || tox -e $(TOX_ENV)
 
 build:
 	python -m build
