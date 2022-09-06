@@ -40,10 +40,10 @@ dev = [
 ]
 test = [
     "flake8 == 4.0.1",
-    "pytest-mock ~= 3.8; python_version > 3.6",
-    "pytest-mock ~= 1.13; python_version < 3.6",
-    "pytest ~= 7.1; python_version > 3.6",
-    "pytest ~= 6.2; python_version < 3.6",
+    'pytest-mock ~= 3.8; python_version > "3.6"',
+    'pytest-mock ~= 1.13; python_version < "3.6"',
+    'pytest ~= 7.1; python_version > "3.6"',
+    'pytest ~= 6.2; python_version < "3.6"',
     "wrapt ~= 1.14",
     "opentelemetry-test-utils == 0.33b0",
     "google-cloud-pubsub ~= 2.13",
