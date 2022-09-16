@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Callable, Collection, TypeVar
 
 from google.cloud.pubsub_v1 import PublisherClient, SubscriberClient

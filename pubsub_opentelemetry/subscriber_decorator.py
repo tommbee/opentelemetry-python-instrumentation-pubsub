@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Any, Callable
 
 from google.cloud.pubsub_v1.subscriber.message import Message
